@@ -1,0 +1,7 @@
+target {
+	{Microchip-CM0+ 1} SAML21E18B {
+		{::chip::core::Microchip-CM0+::internal-flash 0x00000000 0x00040000}
+		{::chip::memory::ram 0x20000000 0x00008000}
+	}
+}
+release 0.1
