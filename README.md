@@ -26,5 +26,5 @@ The debugger is connected to a traget using an edge connector on the target's PC
 
 # Make
 
-The firmware used gnu make and arm-none-eabi-gcc on linux or as provided by msys2 on windows.
+The firmware build uses gnu make and arm-none-eabi-gcc on linux or windows (building on windows requires msys2).
 
