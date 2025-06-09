@@ -6,7 +6,7 @@ Based on [free-dap](https://github.com/ataradov/free-dap), dbu adds the SAML21 a
 
 Using the dbu comprises adding a SAML21 cpu and USB connector to your target development board and providing a method of bootstrapping the dbu firmware into the SAML21.
 
-This repository includes a low-cost edge connector based adaptor as a bootstrap option.
+This repository includes a low-cost edge connector based adaptor as a [bootstrap option](https://github.com/brucebiotech/dbu/blob/main/hardware/bootstrap.md).
 
 ```
                    Target development board
