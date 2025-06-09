@@ -31,6 +31,6 @@ You then need a second, bootstrap dbu to attach to the dbu on the target, e.g.
 
 [![PCB](https://github.com/brucebiotech/dbu/blob/main/docs/saml21-narrow-dbu-v2.png)](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fbrucebiotech%2Fdbu%2Fblob%2Fmain%2Fhardware%2Fsaml21-narrow-dbu-v1.kicad_pcb)
 
-
+Note that this board has a break-away section for the AVX edge connector. Usually you would detach this section and connect the two parts with the 10-pin right angle pin header.
 
 
