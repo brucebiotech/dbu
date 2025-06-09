@@ -12,9 +12,19 @@ LDFLAGS =
 CHIP_INFO = chip.txt
 
 ##############################################################################
+# DBU
+#
+ifeq ($(APPLICATION_NAME), DBU_v1)
+CHIP_INFO = chip_17.txt
+
+BOARD = -D__SAML21E17B__ -DBOARD_DBU_v1
+LDFLAGS += -Wl,--script=../linker/saml21e17b.ld
+BUILD_DIR = build/dbu_v1
+
+##############################################################################
 # First fizzit
 #
-ifeq ($(APPLICATION_NAME), FIZZIT_MDU_V1)
+else ifeq ($(APPLICATION_NAME), FIZZIT_MDU_V1)
 
 BOARD = -D__SAML21G18B__ -DBOARD_FIZZIT_MDU_V1 -DDUBUG_UNIT_PERFORMANCE_ATTR=
 LDFLAGS += -Wl,--script=../linker/saml21e18b.ld
