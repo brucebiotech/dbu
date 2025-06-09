@@ -9,6 +9,6 @@ It also implements cmsis-dap vendor extensions to
 
 ![PCB](https://github.com/brucebiotech/dbu/blob/main/saml21-narrow-dbu-v2.png)
 
-The debugger is connected to a traget using an edge connector on the target PCB.
+The debugger is connected to a traget using an edge connector on the target's PCB.
 
 ![edge](https://github.com/brucebiotech/dbu/blob/main/target-edge-connector.png)
