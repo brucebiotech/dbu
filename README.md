@@ -10,7 +10,7 @@ Firmware for a cmsis-dap compatible arm swd debug adapter.
 
 # About the dbu
 
-It is based on [free-dap](https://github.com/ataradov/free-dap).  It adds the saml21 as a platform and also introduces the capability to connect to multiple target CPU's.
+It is based on [free-dap](https://github.com/ataradov/free-dap) adding the saml21 as a platform and introducing the capability to connect to multiple target CPU's.
 
 
 
