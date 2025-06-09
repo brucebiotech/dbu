@@ -9,19 +9,19 @@ Using the dbu comprises adding a SAML21 cpu and USB connector to your targed dev
 This repository includes a low-cost edge connector adaptor as a bootstrap option.
 
 ```
-                Target development board
-              .------------------------------------------------.
-              |                                                |
-              |                                                |          
-cmsis-dap    ---.   .------.   cmsis-dap                       |  
-hid host     USB|---| DBU  |-----+-----+-----+-----+-----.     |   
-adapter      ---'   '------'     |     |     |     |     |     |   
-              |        |SWD    .---.  ---.  ---.  ---. .---.   |   
-Bootstrap    ---.      |       |CPU| |CPU| |CPU| |CPU| |CPU|   |
-programming   --|------'       |   | |   | |   | |   | |   |   |
-connector    ---'              `---' `---' `---' `---' `---'   |
-              |                     Debug target CPUs          |
-              `------------------------------------------------'
+                   Target development board
+                 .------------------------------------------------.
+                 |                                                |
+                 |                                                |          
+cmsis-dap       ---.   .------.   cmsis-dap                       |  
+hid host        USB|---| DBU  |-----+-----+-----+-----+-----.     |   
+adapter         ---'   '------'     |     |     |     |     |     |   
+                 |        |SWD    .---.  ---.  ---.  ---. .---.   |   
+Bootstrap       ---.      |       |CPU| |CPU| |CPU| |CPU| |CPU|   |
+programming      --|------'       |   | |   | |   | |   | |   |   |
+connector       ---'              `---' `---' `---' `---' `---'   |
+                 |                     Debug target CPUs          |
+                 `------------------------------------------------'
 		
 ```
 
