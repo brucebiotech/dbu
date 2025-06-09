@@ -1,2 +1,2 @@
 # dbu
-cmsis-dap compatible firmware for the fizzit mdu
+cmsis-dap compatible arm swd debug adapter
