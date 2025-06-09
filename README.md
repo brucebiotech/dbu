@@ -8,3 +8,7 @@ It also implements cmsis-dap vendor extensions to
   - and transport a uart debug message stream to the host debugger.
 
 ![PCB](https://github.com/brucebiotech/dbu/blob/main/saml21-narrow-dbu-v2.png)
+
+The debugger is connected to a traget using an edge connector on the target PCB.
+
+![edge](https://github.com/brucebiotech/dbu/blob/main/dbu-edge-connector.png)
