@@ -1,20 +1,22 @@
 # dbu
 Firmware for a cmsis-dap compatible arm swd debug adapter.
 
-[About](#what-is-a-dbu)
+[About](#about-the-dbu)
 
 [Building the software](#make)
 
 [Get DBU hardware](#pcb)
 
 
-# What is a dbu
+# About the dbu
 
-It is based on [free-dap](https://github.com/ataradov/free-dap) adding the saml21 as a platform.
+It is based on [free-dap](https://github.com/ataradov/free-dap).  It adds the saml21 as a platform and also introduces the capability to connect to multiple target CPU's.
+
+
 
 It also implements cmsis-dap vendor extensions to 
   - control power delivery to the target
-  - and transport a uart debug message stream to the host debugger.
+  - transport a uart debug message stream to the host debugger
 
 # PCB
 
