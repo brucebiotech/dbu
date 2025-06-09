@@ -17,7 +17,7 @@ cmsis-dap       ---.   .------.   cmsis-dap                       |
 hid host        USB|---| DBU  |-----+-----+-----+-----+-----.     |   
 adapter         ---'   '------'     |     |     |     |     |     |   
                  |        |SWD    .---.  ---.  ---.  ---. .---.   |   
-Bootstrap       ---.      |       |CPU| |CPU| |CPU| |CPU| |CPU|   |
+bootstrap       ---.      |       |CPU| |CPU| |CPU| |CPU| |CPU|   |
 programming      --|------'       |   | |   | |   | |   | |   |   |
 connector       ---'              `---' `---' `---' `---' `---'   |
                  |                     Debug target CPUs          |
