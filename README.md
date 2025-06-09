@@ -11,4 +11,4 @@ It also implements cmsis-dap vendor extensions to
 
 The debugger is connected to a traget using an edge connector on the target PCB.
 
-![edge](https://github.com/brucebiotech/dbu/blob/main/dbu-edge-connector.png)
+![edge](https://github.com/brucebiotech/dbu/blob/main/target-edge-connector.png)
