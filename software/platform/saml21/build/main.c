@@ -123,7 +123,7 @@ initialise_cpu (void) {
 
 int 
 main (void) {
-	io_t *io = get_device_io ();
+//	io_t *io = get_device_io ();
 
 	initialise_cpu ();
 	
@@ -140,7 +140,8 @@ main (void) {
 	//PM->SLEEPCFG.bit.SLEEPMODE = 5;
 	
 	while (1) {
-		io_wait_for_interrupt (io);
+//		io_wait_for_interrupt (io);
+		__WFI();
 	}
 
 	return 0;

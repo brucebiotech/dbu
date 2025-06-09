@@ -1,13 +1,16 @@
 /*
  *
- * bbt ioKit
- *
  * (c) see end of file for license terms.
  *
  */
 #ifndef _feather_plus_debug_unit_H_
 #define _feather_plus_debug_unit_H_
 #include <io.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stddef.h>
+#include <stdalign.h>
+
 #include "saml21.h"
 #include "cpu/nvm_data.h"
 

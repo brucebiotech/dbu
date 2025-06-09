@@ -14,8 +14,6 @@ enum {
 	FZ3_PINS,
 	FZ4_PINS,
 	FZ5_PINS,
-	
-//	MAX_PIN_SETS,
 };
 
 #define MAX_PIN_SETS NUMBER_OF_SWD_PORTS

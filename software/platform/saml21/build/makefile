@@ -33,8 +33,8 @@ BUILD_DIR = build/fizzit_mdu_v1
 
 else
 
-ifndef BOARD_NAME
-$(error you need to specify an application board, e.g. make APPLICATION_NAME=FIZZIT_MDU_V1)
+ifndef APPLICATION_NAME
+$(error you need to specify an application board, e.g. make APPLICATION_NAME=DBU_v1)
 else
 $(error unsupported board)
 endif
