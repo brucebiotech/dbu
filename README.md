@@ -11,4 +11,4 @@ It also implements cmsis-dap vendor extensions to
 
 [Building the software](https://github.com/brucebiotech/dbu/blob/main/software/README.md)
 
-[dbu hardware](https://github.com/brucebiotech/dbu/blob/main/hardware/README.md)
+[Building the hardware](https://github.com/brucebiotech/dbu/blob/main/hardware/README.md)
