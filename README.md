@@ -1,7 +1,7 @@
 # dbu
-A cmsis-dap compatible arm swd debug adapter.
+Firmware for a cmsis-dap compatible arm swd debug adapter.
 
-It adds the saml21 as a platform to [free-dap](https://github.com/ataradov/free-dap).
+It is based on [free-dap](https://github.com/ataradov/free-dap) adding the saml21 as a platform.
 
 It also implements cmsis-dap vendor extensions to 
   - control power delivery to the target
