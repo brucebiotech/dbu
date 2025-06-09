@@ -7,3 +7,4 @@ It also implements cmsis-dap vendor extensions to
   - control power delivery to the target
   - and transport a uart debug message stream to the host debugger.
 
+![PCB](https://github.com/brucebiotech/dbu/blob/main/saml21-narrow-dbu-v1.png)
