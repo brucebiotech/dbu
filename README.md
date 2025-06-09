@@ -1,5 +1,6 @@
 # dbu
-Firmware for a cmsis-dap compatible arm swd debug adapter.
+
+Software and hardware for a cmsis-dap compatible ARM swd debug unit.
 
 [About](#about-the-dbu)
 
