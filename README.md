@@ -27,7 +27,7 @@ connector       ---'              `---' `---' `---' `---' `---'   |
 
 The dbu software also implements a cmsis-dap vendor extension to control power delivery to the target.
 
-It also supports the cmsis-dap UART commands to tunnel a uart debug message stream over the cmsis-dap HID interface.  In other words dbu enables support for printf debugging of each target CPU over a single USB connectio.
+It also supports the cmsis-dap UART commands to tunnel a uart debug message stream over the cmsis-dap HID interface.  In other words dbu enables support for printf debugging of each target CPU over a single USB connection.
 
 Follow these links for more information including instructions on building the software and hardware.
 
