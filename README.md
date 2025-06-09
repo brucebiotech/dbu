@@ -2,7 +2,7 @@
 
 This repository contains the software and hardware details for a cmsis-dap compatible ARM debug unit.
 
-Based on [free-dap](https://github.com/ataradov/free-dap), dbu adds the SAML21 as a platform and introducs the capability to connect to multiple target CPU's.  The SAML21 can support up to 6 target CPUs.
+Based on [free-dap](https://github.com/ataradov/free-dap), dbu adds the SAML21 as a platform and introducs the capability to connect to multiple target CPU's.  A single SAML21 can support up to 6 target CPUs.
 
 Using the dbu comprises adding a SAML21 cpu and USB connector to your targed development board and providing a method of bootstrapping the code into the SAML21.
 
