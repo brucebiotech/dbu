@@ -16,7 +16,7 @@ The makefile assumes these tools are in the path.
 
 ## Building
 
-Select a supported dbu application tagget from [include/pins.h](https://github.com/brucebiotech/dbu/blob/main/software/platform/saml21/include/pins.h).
+Select a supported dbu application tagget from the [makefile]().
 
 
 
