@@ -29,3 +29,5 @@ The bootstrap dbu is connected to a traget using an edge connector on the target
 
 ![edge](https://github.com/brucebiotech/dbu/blob/main/docs/target-edge-connector.png)
 
+The particular details of this connection are detailed in the KiCad Schematic and PCB hardware files.
+
