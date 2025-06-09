@@ -23,7 +23,7 @@ An option would be to put a standard 10-way debug pin header on the target board
 
 As this connector is not used in the normal development workflow of the target, this is an example hardware for bootstrapping that saves the cost and real estate of adding the 10-pin header. 
 
-The bootstrap dbu is connected to a traget using an edge connector on the target's PCB. The particular details of this connection are detailed in the KiCad Schematic and PCB hardware files.
+The bootstrap dbu is connected to a traget using an edge connector on the target's PCB. The particular details of this connection are detailed in the KiCad [Schematic](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fbrucebiotech%2Fdbu%2Fblob%2Fmain%2Fhardware%2Fsaml21-narrow-dbu-v1.kicad_sch) and [PCB](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%2Fbrucebiotech%2Fdbu%2Fblob%2Fmain%2Fhardware%2Fsaml21-narrow-dbu-v1.kicad_pcb) hardware files.
 
 ![edge](https://github.com/brucebiotech/dbu/blob/main/docs/target-edge-connector.png)
 
