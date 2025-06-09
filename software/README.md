@@ -16,10 +16,17 @@ The makefile assumes these tools are in the path.
 
 ## Building
 
-Select a supported dbu application tagget from [include/pins.h](https://github.com/brucebiotech/dbu/blob/main/software/platform/saml21/include/pins.h).
+Select a supported dbu application name from the [makefile](https://github.com/brucebiotech/dbu/blob/main/software/platform/saml21/build/makefile).
 
+Then use the command
 
+```
+make APPLICATION_NAME=<chosen appliction name>
+```
 
+This will generate a firmware binary dbu.elf in the application build directory ./build/<app name/dbu.elf.
+
+The next step is to load this firmware into the SAML21.
 
 
 
