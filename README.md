@@ -5,7 +5,7 @@ Firmware for a cmsis-dap compatible arm swd debug adapter.
 
 [Building the software](#make)
 
-[dbu hardware](#[pcb](https://github.com/brucebiotech/dbu/blob/main/hardware/README.md))
+[dbu hardware](https://github.com/brucebiotech/dbu/blob/main/hardware/README.md)
 
 
 # About the dbu
