@@ -16,7 +16,7 @@ The makefile assumes these tools are in the path.
 
 ## Building
 
-Select a supported dbu application tagget from the [makefile](https://github.com/brucebiotech/dbu/blob/main/software/platform/saml21/build/makefile).
+Select a supported dbu application name from the [makefile](https://github.com/brucebiotech/dbu/blob/main/software/platform/saml21/build/makefile).
 
 Then use the command
 
