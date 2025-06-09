@@ -1,13 +1,35 @@
 # dbu
 
-Software and hardware for a cmsis-dap compatible ARM swd debug unit.
+This repository contains the software and hardware details for a cmsis-dap compatible ARM debug unit.
 
+Based on [free-dap](https://github.com/ataradov/free-dap), dbu adds the SAML21 as a platform and introducs the capability to connect to multiple target CPU's.
 
-It is based on [free-dap](https://github.com/ataradov/free-dap) adding the saml21 as a platform and introducing the capability to connect to multiple target CPU's.
+Using the dbu comprises adding a SAML21 cpu and USB connector to your targed development board and providing a method of bootstrapping the code into the SAML21.
 
-It also implements cmsis-dap vendor extensions to 
+This repository includes a low-cost edge connector adaptor as a bootstrap option.
+
+```
+                Target development board
+              .------------------------------------------------.
+              |                                                |
+              |                                                |          
+cmsis-dap    ---.   .------.   cmsis-dap                       |  
+hid host     USB|---| DBU  |-----+-----+-----+-----+-----.     |   
+adapter      ---'   '------'     |     |     |     |     |     |   
+              |        |SWD    .---.  ---.  ---.  ---. .---.   |   
+Bootstrap    ---.      |       |CPU| |CPU| |CPU| |CPU| |CPU|   |
+programming   --|------'       |   | |   | |   | |   | |   |   |
+connector    ---'              `---' `---' `---' `---' `---'   |
+              |                                                |
+              `------------------------------------------------'
+		
+```
+
+The dbu software also implements cmsis-dap vendor extensions to 
   - control power delivery to the target
   - transport a uart debug message stream to the host debugger
+
+Follow these links for more information including instructions on building the software and hardware.
 
 [Building the software](https://github.com/brucebiotech/dbu/blob/main/software/README.md)
 
