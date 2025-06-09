@@ -5,7 +5,7 @@ Firmware for a cmsis-dap compatible arm swd debug adapter.
 
 [Building the software](#make)
 
-[Get DBU hardware](#pcb)
+[dbu hardware](#[pcb](https://github.com/brucebiotech/dbu/blob/main/hardware/README.md))
 
 
 # About the dbu
@@ -17,14 +17,6 @@ It is based on [free-dap](https://github.com/ataradov/free-dap) adding the saml2
 It also implements cmsis-dap vendor extensions to 
   - control power delivery to the target
   - transport a uart debug message stream to the host debugger
-
-# PCB
-
-![PCB](https://github.com/brucebiotech/dbu/blob/main/docs/saml21-narrow-dbu-v2.png)
-
-The debugger is connected to a traget using an edge connector on the target's PCB.
-
-![edge](https://github.com/brucebiotech/dbu/blob/main/docs/target-edge-connector.png)
 
 # Make
 
