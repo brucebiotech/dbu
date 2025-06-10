@@ -26,6 +26,14 @@ Similarly the command:
 ```
 will set the active swd port on dbu 0 to be port 3.
 
+To get this edbg command you will need to clone the repository and follow its build instructions.
+
+These are very simple; simply run make all and you will get a small binary, called edbg.
 
 ## Using dbu with OpenOCD
 
+Just ensure that OpenOCD is configured to us cmsis-dap adapter; e.e include the following in your openocd.cfg.
+
+```
+adapter driver  cmsis-dap
+```
