@@ -28,7 +28,7 @@ This will generate a firmware binary dbu.elf in the application build directory 
 
 The next step is to load this firmware into the SAML21.
 
-## Flash firmware
+## Flashing the firmware to the SAML21
 
 Unfortunately there is no magic solution here.  You will need to use your normal default flash programming tool.
 
