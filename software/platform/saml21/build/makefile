@@ -4,7 +4,7 @@
 
 ##############################################################################
 ifndef BUILD_DIR
-BUILD_DIR = .
+BUILD_DIR = output
 endif
 
 
@@ -19,7 +19,7 @@ CHIP_INFO = chip_17.txt
 
 BOARD = -D__SAML21E17B__ -DBOARD_DBU_v1
 LDFLAGS += -Wl,--script=../linker/saml21e17b.ld
-BUILD_DIR = build/dbu_v1
+BUILD_DIR = output/dbu_v1
 
 ##############################################################################
 # First fizzit
@@ -29,7 +29,7 @@ else ifeq ($(APPLICATION_NAME), FIZZIT_MDU_V1)
 BOARD = -D__SAML21G18B__ -DBOARD_FIZZIT_MDU_V1 -DDUBUG_UNIT_PERFORMANCE_ATTR=
 LDFLAGS += -Wl,--script=../linker/saml21e18b.ld
 CHIP_INFO = chip_qfn48.txt
-BUILD_DIR = build/fizzit_mdu_v1
+BUILD_DIR = output/fizzit_mdu_v1
 
 else
 
@@ -90,8 +90,7 @@ CHIP_SECTION = chip
 
 BINARY_NAME = $(BUILD_DIR)/dbu.elf
 
-
-all: $(BUILD_DIR) $(BUILD_DIR)/dbu.elf size
+all: $(BUILD_DIR) $(BUILD_DIR)/dbu.elf $(BUILD_DIR)/dbu.bin size
 
 $(BINARY_NAME): $(OBJS) $(CHIP_INFO) makefile
 	@echo LD $@

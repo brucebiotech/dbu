@@ -94,17 +94,17 @@ enum {
 	ID_DAP_VENDOR_EX_RESET 			= 0xa2,
 	ID_DAP_VENDOR_EX_RESET_STATUS	= 0xa3,
 
-///
-	// these codes duplicate functions provided by ID_DAP_SWJ_PINS
 	ID_DAP_VENDOR_EX_TARGET_POWER	= 0xa4,
 	ID_DAP_VENDOR_EX_TARGET_POWER_STATUS = 0xa5,
-	ID_DAP_VENDOR_EX_SET_SWCLK_STATE = 0xa9,
-///
-
 	ID_DAP_VENDOR_EX_SELECT_SWO   = 0xa6,
 	ID_DAP_VENDOR_EX_SELECTED_SWO = 0xa7,
 
 	ID_DAP_VENDOR_EX_GET_SWD_PORT_COINT = 0xa8,
+
+///
+	// these codes duplicate functions provided by ID_DAP_SWJ_PINS
+	ID_DAP_VENDOR_EX_SET_SWCLK_STATE = 0xa9,
+///
 
 	ID_DAP_VENDOR_EX_LAST		= 0xef,
 	ID_DAP_INVALID_MASK			= 0xf0,	// mask
