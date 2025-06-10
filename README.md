@@ -42,4 +42,6 @@ Follow these links for more information including instructions on building the s
 
 [Building the software](https://github.com/brucebiotech/dbu/blob/main/software/README.md)
 
+[Software user guide](https://github.com/brucebiotech/dbu/blob/main/docs/README.md)
+
 [Building the hardware](https://github.com/brucebiotech/dbu/blob/main/hardware/README.md)
