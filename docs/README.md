@@ -17,6 +17,8 @@ The dbu port of [EDGB](https://github.com/brucebiotech/edbg) provides additional
    -power on|off
 ```
 
+(The uart "printf" port functions in dbu are not yet supported by edbg.)
+
 ### Examples
 
 A get port command:
