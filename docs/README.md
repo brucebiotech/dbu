@@ -10,9 +10,16 @@ dbu will power-up with port 0 active.  In order to connect debug tools to dbu on
 
 ## dbu specific fork of EDBG
 
-The dbu port of [EDGB](https://github.com/brucebiotech/edbg) provides additional dbu specific commands.
+The dbu port of [EDGB](https://github.com/brucebiotech/edbg) provides additional dbu specific command options.
+```
+   -get
+   -set n
+   -power on|off
+```
 
-For example the command:
+### Examples
+
+A get port command:
 ```
    edbg -get -s 0 
 ```
@@ -20,7 +27,7 @@ will print the currently selected port for the dbu with serial number 0.
 
 If the cmsis-dap dbug unit with serial number 0 is not a dbu then this command fails with an error message.
 
-Similarly the command:
+A set port command:
 ```
    edbg -set 3 -s 0 
 ```
