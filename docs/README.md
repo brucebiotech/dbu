@@ -34,7 +34,7 @@ These are very simple; simply run make all and you will get a small binary, call
 
 ## Using dbu with OpenOCD
 
-Just ensure that OpenOCD is configured to us cmsis-dap adapter; e.e include the following in your openocd.cfg.
+Just ensure that OpenOCD is configured to use the cmsis-dap adapter driver; e.e include the following in your openocd.cfg.
 
 ```
 adapter driver  cmsis-dap
