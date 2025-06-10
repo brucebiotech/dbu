@@ -14,7 +14,7 @@ The dbu port of [EDGB](https://github.com/brucebiotech/edbg) provides additional
 ```
    -get
    -set n
-   -power on|off
+   -power on|off|status
 ```
 
 (The uart "printf" port functions in dbu are not yet supported by edbg.)
