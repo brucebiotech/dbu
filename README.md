@@ -8,18 +8,18 @@ Using the dbu comprises adding a SAML21 cpu and USB connector to your target dev
 
 ```
                    Target development board
-                 .------------------------------------------------.
-                 |                                                |
-                 |                                                |          
-cmsis-dap       ---.   .------.   cmsis-dap                       |  
-hid host        USB|---| DBU  |-----+-----+-----+-----+-----.     |   
-adapter         ---'   '------'     |     |     |     |     |     |   
-                 |        |SWD    .---.  ---.  ---.  ---. .---.   |   
-bootstrap       ---.      |       |CPU| |CPU| |CPU| |CPU| |CPU|   |
-programming      --|------'       |   | |   | |   | |   | |   |   |
-connector       ---'              `---' `---' `---' `---' `---'   |
-                 |                     Debug target CPUs          |
-                 `------------------------------------------------'
+                 .------------------------------------------------------.
+                 |                                                      |
+                 |                                                      |          
+cmsis-dap       ---.   .------.   cmsis-dap swd ports                   |  
+hid host        USB|---| DBU  |-----+-----+-----+-----+-----+-----.     |   
+adapter         ---'   '------'     |0    |1    |2    |3    |4    |5    |   
+                 |        |SWD    .---.  ---.  ---.  ---. .---. .---.   |   
+bootstrap       ---.      |       |CPU| |CPU| |CPU| |CPU| |CPU| |CPU|   |
+programming      --|------'       |   | |   | |   | |   | |   | |   |   |
+connector       ---'              `---' `---' `---' `---' `---' `---'   |
+                 |                     Debug target CPUs                |
+                 `------------------------------------------------------'
 		
 ```
 
