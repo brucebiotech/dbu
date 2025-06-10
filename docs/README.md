@@ -26,7 +26,9 @@ Similarly the command:
 ```
 will set the active swd port on dbu 0 to be port 3.
 
-To get this edbg command you will need to clone the repository and follow its build instructions.
+### get edbg
+
+To get the dbu specific edbg command you will need to clone [this repository](https://github.com/brucebiotech/edbg) and follow its build instructions.
 
 These are very simple; simply run make all and you will get a small binary, called edbg.
 
