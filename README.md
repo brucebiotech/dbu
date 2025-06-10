@@ -1,10 +1,12 @@
 # dbu
 
-This repository contains the software and hardware details for dbu, a cmsis-dap compatible ARM debug unit.
+This project provides details on both the software and hardware for dbu, a cmsis-dap tool used for debugging ARM processors.
 
 Based on [free-dap](https://github.com/ataradov/free-dap), dbu adds the SAML21 as a platform and introducs the capability to connect to multiple target CPU's.  A single SAML21 can support up to 6 target CPUs.
 
-Using the dbu comprises adding a SAML21 cpu and USB connector to your target development board and providing a method of bootstrapping the dbu firmware into the SAML21. (This repository includes a low-cost edge connector based adaptor as a [bootstrap option](https://github.com/brucebiotech/dbu/blob/main/hardware/README.md#dbu-bootstrap).)
+## How to use dbu
+
+dbu is a component added to a target development board. 
 
 ```
                    Target development board
@@ -26,12 +28,17 @@ connector       ---'            |  `-+-' `-+-' `-+-' `-+-' `-+-' `-+-'   |
                  `-------------------------------------------------------'
 		
 ```
+To use dbu, add a SAML21 CPU and a USB connector to your development board and provide a method of bootstrapping the dbu firmware into the SAML21. (This repository includes a low-cost edge connector based adaptor as a [bootstrap option](https://github.com/brucebiotech/dbu/blob/main/hardware/README.md#dbu-bootstrap).)
+
+## Additional features
 
 The dbu software also implements a cmsis-dap vendor extension to control power delivery to the target.
 
 It also supports the cmsis-dap UART commands to tunnel a uart debug message stream over the cmsis-dap HID interface.  In other words dbu enables support for printf debugging of each target CPU over a single USB connection.
 
 Follow these links for more information including instructions on building the software and hardware.
+
+## The detail
 
 [Building the software](https://github.com/brucebiotech/dbu/blob/main/software/README.md)
 
