@@ -28,6 +28,14 @@ This will generate a firmware binary dbu.elf in the application build directory 
 
 The next step is to load this firmware into the SAML21.
 
+## Flash firmware
+
+Unfortunately there is no magic solution here.  You will need to use your normal default flash programming tool.
+
+As a suggestion [EDGB](https://github.com/brucebiotech/edbg) is an easy to use cmsis-dap programmer which supports the SAML21.  This particular fork of EDBG als implements some additional functions specific to dbu described [here]().
+
+
+
 
 
 
