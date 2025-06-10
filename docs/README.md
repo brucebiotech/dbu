@@ -21,7 +21,7 @@ The dbu port of [EDGB](https://github.com/brucebiotech/edbg) provides additional
 
 ### Examples
 
-A get port command:
+Get the currently selected dbu port:
 ```
    edbg -get -s 0 
 ```
@@ -29,7 +29,7 @@ will print the currently selected port for the dbu with serial number 0.
 
 If the cmsis-dap dbug unit with serial number 0 is not a dbu then this command fails with an error message.
 
-A set port command:
+Set the currently selected dbu port:
 ```
    edbg -set 3 -s 0 
 ```
@@ -43,8 +43,11 @@ These are very simple; simply run make all and you will get a small binary, call
 
 ## Using dbu with OpenOCD
 
-Just ensure that OpenOCD is configured to use the cmsis-dap adapter driver; e.e include the following in your openocd.cfg.
+Just ensure that OpenOCD is configured to use the cmsis-dap adapter driver; e.g. include the following in your openocd config:
 
 ```
 adapter driver  cmsis-dap
 ```
+By default, OpenOCD will access dbu port 0.  
+
+To attach to other ports you need to execute an [edbg command](#examples) to switch dbu to the required port prior to starting openOCD.
