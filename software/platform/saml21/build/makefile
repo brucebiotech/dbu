@@ -45,7 +45,6 @@ endif
 ##############################################################################
 .PHONY: all clean size
 
-#TOOL_PREFIX = /c/armgcc/2021-10.3/bin/arm-none-eabi-
 TOOL_PREFIX = arm-none-eabi-
 
 CC = $(TOOL_PREFIX)gcc
