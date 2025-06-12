@@ -34,6 +34,11 @@ Unfortunately there is no magic solution here.  You will need to use your normal
 
 As a suggestion [EDGB](https://github.com/brucebiotech/edbg) is an easy to use cmsis-dap programmer which supports the SAML21.  This particular fork of EDBG also implements some additional functions specific to dbu described [here](https://github.com/brucebiotech/dbu/blob/main/docs/README.md).
 
+## Roadmap
+
+dbu currently uses HID without report numbers to be compatible with existing cmsis-dap clients (e.g. openOCD).  The drawback with this is the need to constanly [switch ports](https://github.com/brucebiotech/dbu/blob/main/docs/README.md#examples).
+
+The version of dbu in development uses HID reports to multiplex the cmsis-dap and uart streams.  No more switching and the UART data streams become fully ascnchronous as opposed to the polled streams in the current version.
 
 
 
