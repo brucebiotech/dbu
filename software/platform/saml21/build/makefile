@@ -22,14 +22,14 @@ LDFLAGS += -Wl,--script=../linker/saml21e17b.ld
 BUILD_DIR = output/dbu_v1
 
 ##############################################################################
-# First fizzit
+# Multi debug unid
 #
-else ifeq ($(APPLICATION_NAME), FIZZIT_MDU_V1)
+else ifeq ($(APPLICATION_NAME), MDU_V1)
 
-BOARD = -D__SAML21G18B__ -DBOARD_FIZZIT_MDU_V1 -DDUBUG_UNIT_PERFORMANCE_ATTR=
+BOARD = -D__SAML21G18B__ -DBOARD_MDU_V1 -DDUBUG_UNIT_PERFORMANCE_ATTR=
 LDFLAGS += -Wl,--script=../linker/saml21e18b.ld
 CHIP_INFO = chip_qfn48.txt
-BUILD_DIR = output/fizzit_mdu_v1
+BUILD_DIR = output/mdu_v1
 
 else
 

@@ -62,7 +62,7 @@ HAL_GPIO_PIN (FW4_LED,			A, 6,  0)
 
 #define NUMBER_OF_SWD_PORTS	1
 
-#elif defined(BOARD_FIZZIT_MDU_V1)
+#elif defined(BOARD_MDU_V1)
 
 HAL_GPIO_PIN (FW1_SWCLK_TCK,	B, 2,  0)
 HAL_GPIO_PIN (FW1_SWDIO_TMS,	B, 3,  0)

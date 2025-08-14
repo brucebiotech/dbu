@@ -51,7 +51,7 @@
 #define SWO_UART_BIT_RATE					115200
 
 #define DUBUG_UNIT_VENDOR_STR          "BBT"
-#define DUBUG_UNIT_PRODUCT_STR         "fizzit (CMSIS-DAP)"	// must contain "CMSIS-DAP"
+#define DUBUG_UNIT_PRODUCT_STR         "mdu (CMSIS-DAP)"	// must contain "CMSIS-DAP"
 #define DUBUG_UNIT_VENDOR_ID				0x1209
 #define DUBUG_UNIT_PRODUCT_ID				0x7042
 
