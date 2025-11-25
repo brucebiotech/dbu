@@ -14,27 +14,37 @@ CHIP_INFO = chip.txt
 ##############################################################################
 # DBU
 #
-ifeq ($(APPLICATION_NAME), DBU_v1)
+ifeq ($(BOARD_NAME), DBU_V1)
 CHIP_INFO = chip_17.txt
 
-BOARD = -D__SAML21E17B__ -DBOARD_DBU_v1
+BOARD = -D__SAML21E17B__ -DBOARD_DBU_V1
 LDFLAGS += -Wl,--script=../linker/saml21e17b.ld
 BUILD_DIR = output/dbu_v1
 
 ##############################################################################
-# Multi debug unid
+# Multi debug unit
 #
-else ifeq ($(APPLICATION_NAME), MDU_V1)
+else ifeq ($(BOARD_NAME), MDU_V1)
 
 BOARD = -D__SAML21G18B__ -DBOARD_MDU_V1 -DDUBUG_UNIT_PERFORMANCE_ATTR=
 LDFLAGS += -Wl,--script=../linker/saml21e18b.ld
 CHIP_INFO = chip_qfn48.txt
 BUILD_DIR = output/mdu_v1
 
+##############################################################################
+# Fizzit Pulsar
+#
+else ifeq ($(BOARD_NAME), PULSAR_V1)
+
+BOARD = -D__SAML21G18B__ -DBOARD_PULSAR_V1 -DDUBUG_UNIT_PERFORMANCE_ATTR=
+LDFLAGS += -Wl,--script=../linker/saml21e18b.ld
+CHIP_INFO = chip_qfn48.txt
+BUILD_DIR = output/pulsar_v1
+
 else
 
-ifndef APPLICATION_NAME
-$(error you need to specify an application board, e.g. make APPLICATION_NAME=DBU_v1)
+ifndef BOARD_NAME
+$(error you need to specify an application board, e.g. make BOARD_NAME=DBU_v1)
 else
 $(error unsupported board)
 endif

@@ -35,7 +35,7 @@ fifo_write (uart_fifo_t *fifo,uint8_t byte) {
 void initialise_uart_fifo (uart_fifo_t*);
 uint32_t fifo_count (uart_fifo_t*);
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -56,7 +56,7 @@ initialise_uart_fifo (uart_fifo_t *fifo) {
 	fifo->wr = 0;
 }
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 /*
 

@@ -6,7 +6,7 @@
 
 //-----------------------------------------------------------------------------
 #define IMPLEMENT_IO
-#define IMPLEMENT_FPDU
+#define IMPLEMENT_DBU
 #include "debug_unit.h"
 
 
@@ -132,6 +132,7 @@ main (void) {
 	HAL_GPIO_FW_POWER_ENABLE_out ();
 	#endif
 
+	initialise_fpga ();
 	initialise_cmsis_dap ();
 	initialise_swo ();
 	initialise_usb_serial_number ();

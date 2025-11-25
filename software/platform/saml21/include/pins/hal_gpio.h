@@ -120,7 +120,7 @@
   }								\
 	/**/
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 
 #define HAL_GPIO_PIN(name, port, pin, active_state)						\
 	const uint32_t HAL_GPIO_##name##_active_state = active_state;\
@@ -134,7 +134,7 @@
 	HAL_GPIO_INLINE_FUNCTIONS (name, port, pin)\
 	/**/
 	
-#endif	/* IMPLEMENT_FPDU */
+#endif	/* IMPLEMENT_DBU */
 
 
 void initialise_sercom_uart_rx_only (Sercom *scom,IRQn_Type,uint32_t);
@@ -189,8 +189,11 @@ void initialise_sercom_uart_rx_only (Sercom *scom,IRQn_Type,uint32_t);
 void initialise_sercom_spi (Sercom *scom,IRQn_Type);
 
 #define HAL_SCOM_SPI_INLINE_FUNCTIONS_C(name,scom_name,mux,irqn) \
-	static inline void HAL_UART_##name##_initialise(void) {\
-		HAL_GPIO_##name##_pmuxen (mux);\
+	static inline void HAL_SPI_##name##_initialise(void) {\
+		HAL_GPIO_##name##_##MISO##_pmuxen (mux);\
+		HAL_GPIO_##name##_##MOSI##_pmuxen (mux);\
+		HAL_GPIO_##name##_##SCK##_pmuxen (mux);\
+		HAL_GPIO_##name##_##SS##_pmuxen (mux);\
 		MCLK->APBCMASK.reg |= MCLK_APBCMASK_##scom_name;\
 		GCLK->PCHCTRL[scom_name##_GCLK_ID_CORE].reg = (\
 				0\
@@ -200,17 +203,17 @@ void initialise_sercom_spi (Sercom *scom,IRQn_Type);
 		while (GCLK->SYNCBUSY.reg & ( 1 << (0 + 2)));\
 		initialise_sercom_spi (scom_name,irqn);\
 	}\
-	static inline void HAL_UART_##name##_enable(void) {\
+	static inline void HAL_SPI_##name##_enable(void) {\
 		scom_name->SPI.CTRLA.reg |= SERCOM_SPI_CTRLA_ENABLE;\
 		NVIC_EnableIRQ (irqn);\
 	}\
-	static inline void HAL_UART_##name##_disable(void) {\
+	static inline void HAL_SPI_##name##_disable(void) {\
 		scom_name->SPI.CTRLA.reg &= ~SERCOM_SPI_CTRLA_ENABLE;\
 		NVIC_DisableIRQ (irqn);\
 	}\
   /**/
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -219,6 +222,8 @@ void initialise_sercom_spi (Sercom *scom,IRQn_Type);
 
 void
 initialise_sercom_spi (Sercom *scom,IRQn_Type interupt_number) {
+	scom->SPI.CTRLA.reg = SERCOM_SPI_CTRLA_SWRST;
+	while (scom->SPI.CTRLA.bit.SWRST);
 }
 
 
@@ -289,7 +294,7 @@ initialise_sercom_uart_rx_only (Sercom *scom,IRQn_Type irqn,uint32_t rx_pad) {
 }
 
 
-#endif	/* IMPLEMENT_FPDU */
+#endif	/* IMPLEMENT_DBU */
 #endif // _HAL_GPIO_H_
 /*
  * Copyright (c) 2014-2016, Alex Taradov <alex@taradov.com>

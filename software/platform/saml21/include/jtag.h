@@ -12,13 +12,13 @@
 # include "jtag/no_jtag.h"
 #endif
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
 //
 //-----------------------------------------------------------------------------
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 /*
 

@@ -65,7 +65,7 @@ static inline void DUBUG_UNIT_CONNECT_JTAG (void)
   HAL_GPIO_nRESET_set();
 }
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -80,7 +80,7 @@ DUBUG_UNIT_JTAG_SETUP (void) {
 }
 
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 /*
 

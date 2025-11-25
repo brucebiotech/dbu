@@ -3,8 +3,8 @@
  * (c) see end of file for license terms.
  *
  */
-#ifndef _fpdu_cmsis_dap_extensions_H_
-#define _fpdu_cmsis_dap_extensions_H_
+#ifndef _dbu_cmsis_dap_extensions_H_
+#define _dbu_cmsis_dap_extensions_H_
 
 
 void fpdu_vendor_extension_select_swj_pins (void);
@@ -14,7 +14,7 @@ void fpdu_vendor_extension_select_swo (void);
 void fpdu_vendor_extension_selected_swo (void);
 
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -136,8 +136,47 @@ fpdu_vendor_extension_target_power_state (void) {
 	dap_resp_add_byte (DUBUG_UNIT_TARGET_POWER_PIN_active ());
 }
 
+void
+dbu_vendor_extension_flash_programmer_connect (void) {
+	dap_resp_add_byte (DAP_ERROR);
+}
 
-#endif /* IMPLEMENT_FPDU */
+void
+dbu_vendor_extension_flash_programmer_disconnect (void) {
+	dap_resp_add_byte (DAP_ERROR);
+}
+
+void
+dbu_vendor_extension_flash_programmer_get_memory_info (void) {
+	dap_resp_add_byte (DAP_ERROR);
+}
+
+void
+dbu_vendor_extension_flash_programmer_partial_erase (void) {
+	dap_resp_add_byte (DAP_ERROR);
+}
+
+void
+dbu_vendor_extension_flash_programmer_set_write_range (void) {
+	dap_resp_add_byte (DAP_ERROR);
+}
+
+void
+dbu_vendor_extension_flash_programmer_write (void) {
+	dap_resp_add_byte (DAP_ERROR);
+}
+
+void
+dbu_vendor_extension_flash_programmer_set_read_range (void) {
+	dap_resp_add_byte (DAP_ERROR);
+}
+
+void
+dbu_vendor_extension_flash_programmer_read (void) {
+	dap_resp_add_byte (DAP_ERROR);
+}
+
+#endif /* IMPLEMENT_DBU */
 #endif
 /*
 

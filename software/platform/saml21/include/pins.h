@@ -36,7 +36,7 @@ typedef struct dap_connect_pins {
 } dap_pins_t;
 
 
-#if defined(BOARD_DBU_v1)
+#if defined(BOARD_DBU_V1)
 #define BOARD_HAS_TARGET_POWER
 HAL_GPIO_PIN (FW_POWER_ENABLE, A, 23,  1)
 
@@ -62,7 +62,7 @@ HAL_GPIO_PIN (FW4_LED,			A, 6,  0)
 
 #define NUMBER_OF_SWD_PORTS	1
 
-#elif defined(BOARD_MDU_V1)
+#elif defined(BOARD_MDU_V1) || defined(BOARD_PULSAR_V1)
 
 HAL_GPIO_PIN (FW1_SWCLK_TCK,	B, 2,  0)
 HAL_GPIO_PIN (FW1_SWDIO_TMS,	B, 3,  0)
@@ -84,16 +84,21 @@ HAL_GPIO_PIN (FZ5_SWCLK_TCK,	A,27,  0)
 HAL_GPIO_PIN (FZ5_SWDIO_TMS,	B,23,  0)
 HAL_GPIO_PIN (FZ5_nRESET,		A,21,  0)
 
-
 #define NUMBER_OF_SWD_PORTS	5
+#define HAS_FLASH_PROGRAMMER_PORT
 
 HAL_GPIO_PIN (FPGA_MOSI,			A, 4,  0)
+HAL_GPIO_PIN (FPGA_MISO,			A, 7,  0)
 HAL_GPIO_PIN (FPGA_SCK,				A, 5,  0)
 HAL_GPIO_PIN (FPGA_SS,				A, 6,  1)
-HAL_GPIO_PIN (FPGA_MISO,			A, 7,  0)
+
+HAL_SCOM_SPI_INLINE_FUNCTIONS_C(FPGA,SERCOM0,PORT_PMUX_PMUXE_D,SERCOM0_IRQn)
+
+HAL_GPIO_PIN (FPGA_CRESET,			B, 8,  0)
+HAL_GPIO_PIN (FPGA_CDONE,			B, 0,  1)
 
 #else
-# error "need BOARD defined"
+# error "need BOARD_NAME defined"
 #endif
 
 extern dap_pins_t* active_pins;
@@ -231,7 +236,7 @@ DUBUG_UNIT_CONNECT_SWJ_PINS (void) {
 	DUBUG_UNIT_SWCLK_TCK_set ();
 }
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -474,7 +479,7 @@ DUBUG_UNIT_RESET_TARGET_FN (void) {
 	}
 }
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 /*
 

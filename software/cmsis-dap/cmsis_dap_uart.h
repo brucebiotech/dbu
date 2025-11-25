@@ -5,7 +5,7 @@
  */
 #ifndef _fpdu_cmsis_dap_uart_H_
 #define _fpdu_cmsis_dap_uart_H_
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -117,7 +117,7 @@ cmsis_dap_uart_transfer (void) {
 	dap_resp_set_uint16 (count_ptr,count);
 }
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 /*
 

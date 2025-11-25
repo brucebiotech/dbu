@@ -7,7 +7,7 @@
 #define _dap_device_jtag_h_
 
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -22,7 +22,7 @@ void
 DUBUG_UNIT_CONNECT_JTAG (void) {
 }
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 /*
 

@@ -12,12 +12,21 @@
 // Implementation
 //
 //-----------------------------------------------------------------------------
-
+#ifdef HAS_FLASH_PROGRAMMER_PORT
 void
 initialise_fpga (void) {
-
+	HAL_SPI_FPGA_initialise ();
+	HAL_GPIO_FPGA_CDONE_in ();
+	
+	HAL_GPIO_FPGA_CRESET_write_state (HAL_GPIO_PIN_INACTIVE);
+	HAL_GPIO_FPGA_CRESET_out ();
 }
-
+#else
+void
+initialise_fpga (void) {
+	// nothing to do
+}
+#endif
 #endif /* IMPLEMENT_DBU */
 #endif
 /*

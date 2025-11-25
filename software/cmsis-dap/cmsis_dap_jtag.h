@@ -9,7 +9,7 @@
 #define ARM_JTAG_IR_LENGTH  4
 
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -51,7 +51,7 @@ static void dap_jtag_idcode(void)
 #endif
 }
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 /*
 

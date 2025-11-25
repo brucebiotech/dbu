@@ -6,7 +6,7 @@
 #ifndef _device_fz2_pins_H_
 #define _device_fz2_pins_H_
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -108,6 +108,6 @@ fw2_reset_clear (void) {
 	HAL_GPIO_FW2_nRESET_clr ();
 }
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 

@@ -6,7 +6,7 @@
 #ifndef _device_fz3_pins_H_
 #define _device_fz3_pins_H_
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -109,6 +109,6 @@ fw3_reset_clear (void) {
 }
 
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 

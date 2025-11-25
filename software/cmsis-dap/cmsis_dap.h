@@ -106,6 +106,15 @@ enum {
 	ID_DAP_VENDOR_EX_SET_SWCLK_STATE = 0xa9,
 ///
 
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_DISCONNECT = 0xaa,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_GET_MEMORY_INFO = 0xab,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_PARTIAL_ERASE = 0xac,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_WRITE = 0xad,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_READ = 0xae,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_SET_WRITE_RANGE = 0xaf,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_SET_READ_RANGE = 0xb0,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_CONNECT = 0xb1,
+
 	ID_DAP_VENDOR_EX_LAST		= 0xef,
 	ID_DAP_INVALID_MASK			= 0xf0,	// mask
 	ID_DAP_INVALID					= 0xff,	// invalid pin-set
@@ -233,7 +242,7 @@ enum {
 
 void cmsis_dap_debug_unit_info (void);
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -1443,6 +1452,16 @@ process_cmsis_dap_request (uint8_t *req, int req_size, uint8_t *resp, int resp_s
 		{ ID_CMSI_DAP_UART_CONTROL,		cmsis_dap_uart_control},
 		{ ID_CMSI_DAP_UART_STATUS,			cmsis_dap_uart_status},
 
+		#ifdef HAS_FLASH_PROGRAMMER_PORT
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_CONNECT, dbu_vendor_extension_flash_programmer_connect},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_DISCONNECT, dbu_vendor_extension_flash_programmer_disconnect},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_GET_MEMORY_INFO, dbu_vendor_extension_flash_programmer_get_memory_info},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_PARTIAL_ERASE, dbu_vendor_extension_flash_programmer_partial_erase},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_WRITE, dbu_vendor_extension_flash_programmer_write},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_READ, dbu_vendor_extension_flash_programmer_set_read_range},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_SET_WRITE_RANGE, dbu_vendor_extension_flash_programmer_set_write_range},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_SET_READ_RANGE, dbu_vendor_extension_flash_programmer_read},
+		#endif
 	};
 	int cmd;
 	
@@ -1493,7 +1512,7 @@ void dap_clock_test (int delay)
   }
 }
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif // _DAP_H_
 /*
  * Copyright (c) 2016, Alex Taradov <alex@taradov.com>

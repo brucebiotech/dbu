@@ -78,7 +78,7 @@ void DUBUG_UNIT_DELAY (uint32_t);
 #include "jtag.h"
 #include "cmsis_dap.h"
 #include "swo.h"
-
+#include "fpga.h"
 
 //-----------------------------------------------------------------------------
 __attribute__((always_inline))
@@ -92,7 +92,7 @@ static inline void DUBUG_UNIT_DELAY_LOOP (uint32_t cycles)
 }
 
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -280,8 +280,7 @@ cmsis_dap_debug_unit_info (void) {
 	}
 }
 
-
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif // _DUBUG_UNIT_H_
 // SPDX-License-Identifier: BSD-3-Clause
 // Copyright (c) 2016-2022, Alex Taradov <alex@taradov.com>. All rights reserved.

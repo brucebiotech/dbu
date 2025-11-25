@@ -6,7 +6,7 @@
 #ifndef _device_fz5_pins_H_
 #define _device_fz5_pins_H_
 
-#ifdef IMPLEMENT_FPDU
+#ifdef IMPLEMENT_DBU
 //-----------------------------------------------------------------------------
 //
 // Implementation
@@ -110,6 +110,6 @@ fz5_reset_clear (void) {
 
 
 
-#endif /* IMPLEMENT_FPDU */
+#endif /* IMPLEMENT_DBU */
 #endif
 
