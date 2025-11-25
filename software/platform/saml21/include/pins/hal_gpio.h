@@ -222,8 +222,21 @@ void initialise_sercom_spi (Sercom *scom,IRQn_Type);
 
 void
 initialise_sercom_spi (Sercom *scom,IRQn_Type interupt_number) {
-	scom->SPI.CTRLA.reg = SERCOM_SPI_CTRLA_SWRST;
-	while (scom->SPI.CTRLA.bit.SWRST);
+	SercomSpi *spi = &(scom->SPI);
+
+	spi->CTRLA.reg = (
+			SERCOM_SPI_CTRLA_MODE (0x03)	// Set the SERCOM in SPI master mode 
+		|	SERCOM_SPI_CTRLA_SWRST
+	);
+	while (spi->CTRLA.bit.SWRST);
+	
+	if (scom == SERCOM5) {
+		uint64_t baud = 65536ULL - (65536ULL * 16 * FPGA_SPI_BIT_RATE )/F_CPU;
+	
+		spi->SPI.BAUD.reg = (uint16_t) baud;
+	} else {
+	
+	}
 }
 
 

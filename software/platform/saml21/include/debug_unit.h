@@ -48,10 +48,26 @@
 #else
 # define DUBUG_UNIT_UART_BUFFER_SIZE	(4096 - 1200)
 #endif
+
 #define SWO_UART_BIT_RATE					115200
+#define FPGA_SPI_BIT_RATE					1000000
 
 #define DUBUG_UNIT_VENDOR_STR          "BBT"
 #define DUBUG_UNIT_PRODUCT_STR         "mdu (CMSIS-DAP)"	// must contain "CMSIS-DAP"
+
+/*
+ * Conditions on use of VID 0x1209 and PID 0x7042 
+ * ==============================================
+ *
+ * Redistributions of this software may use the USB VID 0x1209 and PID 0x7042.
+ *
+ * It this case it is a requirement that all the bits in CPU ID of 
+ * the targeted platform be stringified and used as the USB serial number.
+ * For example see initialise_usb_serial_number() used for the saml21 platform.
+ *
+ * No other use of the USB VID 0x1209 is permitted.
+ *
+ */
 #define DUBUG_UNIT_VENDOR_ID				0x1209
 #define DUBUG_UNIT_PRODUCT_ID				0x7042
 

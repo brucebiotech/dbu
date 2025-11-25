@@ -83,9 +83,6 @@ HAL_SCOM_UART_INLINE_FUNCTIONS_D (FZ5_SWO,SERCOM5,PORT_PMUX_PMUXE_D,SERCOM5_IRQn
 # error "need board define"
 #endif
 
-
-
-
 extern struct swo_uart *active_swo_uart;
 
 #ifdef IMPLEMENT_DBU
