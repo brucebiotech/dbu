@@ -2,6 +2,8 @@
 
 This project provides details on both the software and hardware for dbu, a cmsis-dap tool used for debugging ARM processors.
 
+The dbu's main role is as a bootstrapping programmer for more complete multi-target development tools such as the [fizzit pulsar](https://github.com/brucebiotech/splice/blob/main/docs/README.md).
+
 Based on [free-dap](https://github.com/ataradov/free-dap), dbu adds the SAML21 as a platform and introducs the capability to connect to multiple target CPU's.  A single SAML21 can support up to 6 target CPUs.
 
 ## How to use dbu
@@ -35,8 +37,6 @@ To use dbu, add a SAML21 CPU and a USB connector to your development board and p
 The dbu software also implements a cmsis-dap vendor extension to control power delivery to the target.
 
 It also supports the cmsis-dap UART commands to tunnel a uart debug message stream over the cmsis-dap HID interface.  In other words dbu enables support for printf debugging of each target CPU over a single USB connection.
-
-The dbu's main role is as a bootstrapping programmer for more complete multi-target development tools such as the [fizzit pulsar](https://github.com/brucebiotech/splice/blob/main/docs/README.md).
 
 ## The detail
 

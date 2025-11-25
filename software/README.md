@@ -21,10 +21,12 @@ Select a supported dbu application name from the [makefile](https://github.com/b
 Then use the command
 
 ```
-make APPLICATION_NAME=<chosen appliction name>
+make BOARD_NAME=<chosen board name>
 ```
 
 This will generate a firmware binary dbu.elf in the application build directory ./build/<app name/dbu.elf.
+
+Details of supported boards are in the platform Makefile.
 
 The next step is to load this firmware into the SAML21.
 
