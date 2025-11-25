@@ -65,6 +65,10 @@
  * the targeted platform be stringified and used as the USB serial number.
  * For example see initialise_usb_serial_number() used for the saml21 platform.
  *
+ * If the targeted platform does not have a CPU ID then an eight byte, true random 
+ * number must be generated for each redistributed binary copy and used as it's
+ * USB serial number.
+ *
  * No other use of the USB VID 0x1209 is permitted.
  *
  */
