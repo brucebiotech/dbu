@@ -9,6 +9,7 @@
 #define _DAP_H_
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define ARRAY_SIZE(x)  ((int)(sizeof(x) / sizeof(0[x])))
 
@@ -19,6 +20,7 @@ uint8_t dap_req_get_byte (void);
 uint16_t dap_req_get_uint16 (void);
 uint32_t dap_req_get_uint32 (void);
 void dap_resp_add_byte (uint8_t);
+void dap_resp_add_bytes(uint8_t const*,int32_t);
 int dap_resp_add_uint16 (uint16_t);
 void dap_resp_set_uint16 (int index, uint16_t value);
 void dap_resp_add_word (uint32_t value);
@@ -109,10 +111,10 @@ enum {
 	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_DISCONNECT = 0xaa,
 	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_GET_MEMORY_INFO = 0xab,
 	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_PARTIAL_ERASE = 0xac,
-	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_WRITE = 0xad,
-	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_READ = 0xae,
-	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_SET_WRITE_RANGE = 0xaf,
-	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_SET_READ_RANGE = 0xb0,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_BEGIN_WRITE = 0xad,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_WRITE_CHUNK = 0xae,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_END_WRITE = 0xaf,
+	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_READ = 0xb0,
 	ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_CONNECT = 0xb1,
 
 	ID_DAP_VENDOR_EX_LAST		= 0xef,
@@ -775,6 +777,20 @@ uint32_t dap_req_get_uint32(void)
   return value;
 }
 
+
+//-----------------------------------------------------------------------------
+uint8_t const* dap_req_get_bytes(uint8_t size)
+{
+  if (dap_buf_error || ((dap_req_size - dap_req_ptr) < size))
+  {
+    dap_buf_error = true;
+    return 0;
+  }
+  uint8_t const* bytes = dap_req_buf + dap_req_ptr;
+  dap_req_ptr += size;
+  return bytes;
+}
+
 //-----------------------------------------------------------------------------
 void dap_resp_add_byte(uint8_t value)
 {
@@ -785,6 +801,19 @@ void dap_resp_add_byte(uint8_t value)
   }
 
   dap_resp_buf[dap_resp_ptr++] = value;
+}
+
+//-----------------------------------------------------------------------------
+void dap_resp_add_bytes(uint8_t const *bytes,int32_t size)
+{
+  if (dap_buf_error || ((dap_resp_size - dap_resp_ptr) < size))
+  {
+    dap_buf_error = true;
+    return;
+  }
+  memcpy (dap_resp_buf + dap_resp_ptr,bytes,size);
+  
+  dap_resp_ptr += size;
 }
 
 //-----------------------------------------------------------------------------
@@ -1457,10 +1486,10 @@ process_cmsis_dap_request (uint8_t *req, int req_size, uint8_t *resp, int resp_s
 		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_DISCONNECT, dbu_vendor_extension_flash_programmer_disconnect},
 		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_GET_MEMORY_INFO, dbu_vendor_extension_flash_programmer_get_memory_info},
 		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_PARTIAL_ERASE, dbu_vendor_extension_flash_programmer_partial_erase},
-		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_WRITE, dbu_vendor_extension_flash_programmer_write},
-		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_READ, dbu_vendor_extension_flash_programmer_set_read_range},
-		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_SET_WRITE_RANGE, dbu_vendor_extension_flash_programmer_set_write_range},
-		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_SET_READ_RANGE, dbu_vendor_extension_flash_programmer_read},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_BEGIN_WRITE, dbu_vendor_extension_flash_programmer_begin_write},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_WRITE_CHUNK, dbu_vendor_extension_flash_programmer_write_chunk},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_END_WRITE, dbu_vendor_extension_flash_programmer_end_write},
+		{ID_DAP_VENDOR_EX_FLASH_PROGRAMMER_READ, dbu_vendor_extension_flash_programmer_read},
 		#endif
 	};
 	int cmd;

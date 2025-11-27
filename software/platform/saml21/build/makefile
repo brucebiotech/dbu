@@ -36,7 +36,7 @@ BUILD_DIR = output/mdu_v1
 #
 else ifeq ($(BOARD_NAME), PULSAR_V1)
 
-BOARD = -D__SAML21G18B__ -DBOARD_PULSAR_V1 -DDUBUG_UNIT_PERFORMANCE_ATTR=
+BOARD = -DDUBUG_UNIT_PRODUCT_NAME="\"fizzit pulsar\"" -D__SAML21G18B__ -DBOARD_PULSAR_V1 -DDUBUG_UNIT_PERFORMANCE_ATTR=
 LDFLAGS += -Wl,--script=../linker/saml21e18b.ld
 CHIP_INFO = chip_qfn48.txt
 BUILD_DIR = output/pulsar_v1

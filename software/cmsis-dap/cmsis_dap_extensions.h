@@ -136,45 +136,123 @@ fpdu_vendor_extension_target_power_state (void) {
 	dap_resp_add_byte (DUBUG_UNIT_TARGET_POWER_PIN_active ());
 }
 
+#ifdef HAS_FLASH_PROGRAMMER_PORT
+
+#define FPGA_OK	0x70
+
 void
 dbu_vendor_extension_flash_programmer_connect (void) {
-	dap_resp_add_byte (DAP_ERROR);
+	uint8_t buffer[4];
+	byte_buffer_t id = def_byte_buffer (buffer,sizeof(buffer));
+
+	HAL_GPIO_FPGA_CRESET_out ();
+	HAL_GPIO_FPGA_CRESET_write_state (HAL_GPIO_PIN_ACTIVE);
+
+	HAL_GPIO_FPGA_SS_write_state (HAL_GPIO_PIN_INACTIVE);
+	HAL_GPIO_FPGA_SS_out ();
+
+	HAL_SPI_FPGA_enable ();
+	flash_wakeup ();
+	flash_get_chip_id (id);
+	dap_resp_add_byte (FPGA_OK);
 }
 
 void
 dbu_vendor_extension_flash_programmer_disconnect (void) {
-	dap_resp_add_byte (DAP_ERROR);
+	HAL_SPI_FPGA_disable ();
+	HAL_GPIO_FPGA_SS_in ();
+	HAL_GPIO_FPGA_CRESET_in ();
+	dap_resp_add_byte (FPGA_OK);
 }
 
+//
+// chip id
+//
 void
 dbu_vendor_extension_flash_programmer_get_memory_info (void) {
-	dap_resp_add_byte (DAP_ERROR);
+	uint8_t buffer[4];
+	byte_buffer_t id = def_byte_buffer (buffer,sizeof(buffer));
+
+	if (flash_get_chip_id (id) == 4) {
+		dap_resp_add_byte (FPGA_OK);
+		dap_resp_add_byte (buffer[0]);
+		dap_resp_add_byte (buffer[1]);
+		dap_resp_add_byte (buffer[2]);
+		dap_resp_add_byte (buffer[3]);
+	} else {
+		dap_resp_add_byte (DAP_ERROR);
+	}
 }
 
+//
+//	begin block to end block
+//
+//
 void
 dbu_vendor_extension_flash_programmer_partial_erase (void) {
-	dap_resp_add_byte (DAP_ERROR);
+	uint16_t first_block = dap_req_get_uint16 ();
+	uint16_t last_block = dap_req_get_uint16 ();
+	
+	uint16_t count = flash_partial_erase (first_block,last_block);
+	
+	dap_resp_add_byte (FPGA_OK);
+	dap_resp_add_uint16 (count);
 }
 
 void
-dbu_vendor_extension_flash_programmer_set_write_range (void) {
-	dap_resp_add_byte (DAP_ERROR);
+dbu_vendor_extension_flash_programmer_begin_write (void) {
+	uint32_t begin = dap_req_get_uint32 ();
+	if (flash_begin_write (begin)) {
+		dap_resp_add_byte (FPGA_OK);
+		dap_resp_add_word (begin);
+	} else {
+		dap_resp_add_byte (DAP_ERROR);
+		dap_resp_add_word (0);
+	}
 }
 
 void
-dbu_vendor_extension_flash_programmer_write (void) {
-	dap_resp_add_byte (DAP_ERROR);
+dbu_vendor_extension_flash_programmer_write_chunk (void) {
+	uint8_t size = dap_req_get_byte ();
+	uint8_t const *data = dap_req_get_bytes (size);
+	if (data != NULL) {
+		uint8_t status = flash_write_chunk (data,size);
+		if (status == 0) {
+			dap_resp_add_byte (FPGA_OK);
+			dap_resp_add_byte (0);
+		} else {
+			dap_resp_add_byte (DAP_ERROR);
+			dap_resp_add_byte (status);
+		}
+	} else {
+		dap_resp_add_byte (DAP_ERROR);
+		dap_resp_add_byte (data[0]);
+	}
 }
 
 void
-dbu_vendor_extension_flash_programmer_set_read_range (void) {
-	dap_resp_add_byte (DAP_ERROR);
+dbu_vendor_extension_flash_programmer_end_write (void) {
+	dap_resp_add_byte (FPGA_OK);
+	dap_resp_add_word (flash_end_write ());
 }
 
 void
 dbu_vendor_extension_flash_programmer_read (void) {
-	dap_resp_add_byte (DAP_ERROR);
+	uint32_t address = dap_req_get_uint32 ();
+	uint8_t size = dap_req_get_byte ();
+
+	if (size < (DUBUG_UNIT_PACKET_SIZE - 1)) {
+		uint8_t data[DUBUG_UNIT_PACKET_SIZE] = {0};
+		flash_read_content (address,def_byte_buffer (data,size));
+		dap_resp_add_byte (FPGA_OK);
+		dap_resp_add_byte (size);
+		dap_resp_add_bytes (data,size);
+	} else {
+		dap_resp_add_byte (DAP_ERROR);
+		dap_resp_add_byte (size);
+	}
 }
+#endif /* HAS_FLASH_PROGRAMMER_PORT */
 
 #endif /* IMPLEMENT_DBU */
 #endif

@@ -6,6 +6,21 @@
 #ifndef _HAL_GPIO_H_
 #define _HAL_GPIO_H_
 
+typedef struct {
+	uint8_t const *bytes;
+	uint32_t size;
+} byte_slice_t;
+
+#define def_byte_slice(P,S) (byte_slice_t) {.bytes = P,.size = S}
+
+typedef struct {
+	uint8_t *bytes;
+	uint32_t size;
+} byte_buffer_t;
+
+#define def_byte_buffer(P,S) (byte_buffer_t) {.bytes = P,.size = S}
+
+
 #define HAL_GPIO_PORTA       0
 #define HAL_GPIO_PORTB       1
 #define HAL_GPIO_PORTC       2
@@ -186,14 +201,19 @@ void initialise_sercom_uart_rx_only (Sercom *scom,IRQn_Type,uint32_t);
 	}\
   /**/
 
-void initialise_sercom_spi (Sercom *scom,IRQn_Type);
+void initialise_sercom_spi (Sercom *scom,IRQn_Type,uint32_t,uint32_t);
+void sercom_spi_write_read (SercomSpi*,byte_slice_t,byte_buffer_t);
+uint32_t flash_get_chip_id (byte_buffer_t);
+uint16_t flash_partial_erase (uint16_t,uint16_t);
+uint8_t flash_begin_write (uint32_t);
+uint8_t flash_write_chunk (uint8_t const*,uint32_t);
+uint32_t flash_end_write (void);
+uint32_t flash_read_content (uint32_t,byte_buffer_t);
+void flash_wakeup (void);
+void flash_sleep (void);
 
-#define HAL_SCOM_SPI_INLINE_FUNCTIONS_C(name,scom_name,mux,irqn) \
+#define HAL_SCOM_SPI_INLINE_FUNCTIONS_C(name,scom_name,mux,irqn,dipo,dopo) \
 	static inline void HAL_SPI_##name##_initialise(void) {\
-		HAL_GPIO_##name##_##MISO##_pmuxen (mux);\
-		HAL_GPIO_##name##_##MOSI##_pmuxen (mux);\
-		HAL_GPIO_##name##_##SCK##_pmuxen (mux);\
-		HAL_GPIO_##name##_##SS##_pmuxen (mux);\
 		MCLK->APBCMASK.reg |= MCLK_APBCMASK_##scom_name;\
 		GCLK->PCHCTRL[scom_name##_GCLK_ID_CORE].reg = (\
 				0\
@@ -201,15 +221,25 @@ void initialise_sercom_spi (Sercom *scom,IRQn_Type);
 			|	GCLK_PCHCTRL_CHEN\
 		);\
 		while (GCLK->SYNCBUSY.reg & ( 1 << (0 + 2)));\
-		initialise_sercom_spi (scom_name,irqn);\
+		initialise_sercom_spi (scom_name,irqn,dipo,dopo);\
 	}\
 	static inline void HAL_SPI_##name##_enable(void) {\
+		HAL_GPIO_##name##_##MISO##_pmuxen (mux);\
+		HAL_GPIO_##name##_##MOSI##_pmuxen (mux);\
+		HAL_GPIO_##name##_##SCK##_pmuxen (mux);\
 		scom_name->SPI.CTRLA.reg |= SERCOM_SPI_CTRLA_ENABLE;\
-		NVIC_EnableIRQ (irqn);\
 	}\
 	static inline void HAL_SPI_##name##_disable(void) {\
+		HAL_GPIO_##name##_##MISO##_pmuxdis ();\
+		HAL_GPIO_##name##_##MOSI##_pmuxdis ();\
+		HAL_GPIO_##name##_##SCK##_pmuxdis ();\
+		HAL_GPIO_##name##_##MISO##_in ();\
+		HAL_GPIO_##name##_##MOSI##_in ();\
+		HAL_GPIO_##name##_##SCK##_in ();\
 		scom_name->SPI.CTRLA.reg &= ~SERCOM_SPI_CTRLA_ENABLE;\
-		NVIC_DisableIRQ (irqn);\
+	}\
+	static inline void HAL_SPI_##name##_write_read(byte_slice_t wr,byte_buffer_t rd) {\
+		sercom_spi_write_read (&scom_name->SPI,wr,rd);\
 	}\
   /**/
 
@@ -221,7 +251,9 @@ void initialise_sercom_spi (Sercom *scom,IRQn_Type);
 //-----------------------------------------------------------------------------
 
 void
-initialise_sercom_spi (Sercom *scom,IRQn_Type interupt_number) {
+initialise_sercom_spi (
+	Sercom *scom,IRQn_Type interupt_number,uint32_t dipo,uint32_t dopo
+) {
 	SercomSpi *spi = &(scom->SPI);
 
 	spi->CTRLA.reg = (
@@ -230,12 +262,46 @@ initialise_sercom_spi (Sercom *scom,IRQn_Type interupt_number) {
 	);
 	while (spi->CTRLA.bit.SWRST);
 	
-	if (scom == SERCOM5) {
-		uint64_t baud = 65536ULL - (65536ULL * 16 * FPGA_SPI_BIT_RATE )/F_CPU;
+	uint64_t baud = F_CPU/(2 * FPGA_SPI_BIT_RATE) - 1;
+	spi->BAUD.reg = (uint16_t) baud;
+
+	spi->CTRLA.reg = (
+			SERCOM_SPI_CTRLA_MODE (0x03)	// Set the SERCOM in SPI master mode 
+		|	SERCOM_SPI_CTRLA_DOPO (dopo)
+		|	SERCOM_SPI_CTRLA_DIPO (dipo)
+	);
+
+	spi->CTRLB.reg = (
+			SERCOM_SPI_CTRLB_RXEN
+		|	SERCOM_SPI_CTRLB_CHSIZE (0)
+	);
+}
+
+void
+sercom_spi_write_read (SercomSpi *spi,byte_slice_t wr,byte_buffer_t rd) {
+	uint32_t write_incr = 1,read_incr = 1;
+	uint8_t dummy_data = 0xff;
+	int32_t length;
+
+	if (wr.size == 0) {
+		wr.bytes = &dummy_data;
+		write_incr = 0;
+	}
 	
-		spi->SPI.BAUD.reg = (uint16_t) baud;
-	} else {
+	if (rd.size == 0) {
+		rd.bytes = &dummy_data;
+		read_incr = 0;
+	}
 	
+	length = (wr.size > rd.size)? wr.size : rd.size;
+	while (length--) {
+		while (spi->INTFLAG.bit.DRE == 0);
+		spi->DATA.reg = *(wr.bytes);
+		wr.bytes += write_incr;
+
+		while ((spi->INTFLAG.reg & SERCOM_SPI_INTFLAG_RXC) == 0);
+		*rd.bytes = (uint8_t) spi->DATA.reg;
+		rd.bytes += read_incr;
 	}
 }
 

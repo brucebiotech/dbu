@@ -35,7 +35,6 @@
 		__DMB();	\
 	} while (0)
 
-
 #define DUBUG_UNIT_DEFAULT_PORT        DAP_PORT_SWD
 #define DUBUG_UNIT_DEFAULT_CLOCK       1000000 // Hz
 #define DUBUG_UNIT_PACKET_SIZE         64
@@ -50,10 +49,15 @@
 #endif
 
 #define SWO_UART_BIT_RATE					115200
-#define FPGA_SPI_BIT_RATE					1000000
+#define FPGA_SPI_BIT_RATE					4000000
 
 #define DUBUG_UNIT_VENDOR_STR          "BBT"
-#define DUBUG_UNIT_PRODUCT_STR         "mdu (CMSIS-DAP)"	// must contain "CMSIS-DAP"
+
+#ifndef DUBUG_UNIT_PRODUCT_NAME
+# define DUBUG_UNIT_PRODUCT_NAME "dbu"
+#endif
+
+#define DUBUG_UNIT_PRODUCT_STR         DUBUG_UNIT_PRODUCT_NAME" (CMSIS-DAP)"	// must contain "CMSIS-DAP"
 
 /*
  * Conditions on use of VID 0x1209 and PID 0x7042 
